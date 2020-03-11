@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+	  <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+     
+	 <!-- If you are opening this page from local machine, uncomment belwo line -->
+       
+	  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> 
+	  
+	 
+      <title>E-HEALTH PROJECT</title>
+        <style>
+
+    .center { 
+		height: 400px;
+		width: 380px;
+		background: #beb347;
+		position: fixed;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		top: 50%;
+		left: 50%;
+		margin-top: -180px;
+		margin-left: -200px;
+	}
+	
+	.form{
+		padding-top: 10px;
+		padding-right: 30px;
+		padding-bottom: 50px;
+		padding-left: 30px;
+	}
+    .ip{
+		background-color: #ffffff; /* Green */
+		border: none;
+		color: black;
+		padding: 16px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		-webkit-transition-duration: 0.4s;
+    }
+        </style>
+    </head>
+   <body bgcolor="#ffffff">
+    <center>
+		<h1 style="font-family: Helvetica;color: black;">E-HEALTH PROJECT</h1>
+		<h2 style="font-family: Helvetica;color: black;">KWARA STATE UNIVERSITY MALETE</h2>
+    </center>
+	<div class="center">
+	   <div align="center" class="form">
+           <br><br>
+            <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="temperature">
+                <img src = 'images/temperature.png' height="60px" width="60px" style='vertical-align: middle' /> 00.00
+            </p>
+            <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="humidity">
+                <img src = 'images/1heart.png' height="75px" width="75px" style='vertical-align: middle' /> 00.00
+            </p>
+        </div>
+	</div>
+    </body>
+    
+	<script>
+		window.onload = function() {
+            loaddata();
+        };
+		function loaddata(){
+				var url = "https://ihealthproject.000webhostapp.com/api1/health/read_all.php";
+				$.getJSON(url, function(data) {
+                    var val= data;
+                  var humid=(data['health'][(Object.keys(data['health']).length)-1]['pulse']);
+                   var temper=(data['health'][(Object.keys(data['health']).length)-1]['temp']);
+                   document.getElementById("temperature").innerHTML = "<img src = 'images/temperature.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  " +temper;
+                   document.getElementById("humidity").innerHTML = "<img src = 'images/1heart.png' height=\"75px\" width=\"75px\" style='vertical-align: middle' />  "+humid;
+					console.log(data['health'][(Object.keys(data['health']).length)-1]['temp']);
+				});
+            
+        }
+        window.setInterval(function(){
+        loaddata();
+            }, 5000);
+	
+	</script>
+</html>

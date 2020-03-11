@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+	  <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+     
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	 
+      <title>ESP 8266 Node MCU Web APP LED Control IoT Monk</title>
+	 <style>
+	.center { 
+		height: 370px;
+		width: 400px;
+		background: rgb(197, 61, 19);
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		margin-top: -170px;
+		margin-left: -200px;
+        margin-bottom: 20px;
+	}
+	
+	.form{
+		padding-top: 50px;
+		padding-right: 30px;
+		padding-bottom: 50px;
+		padding-left: 30px;
+	}
+
+	.button {
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 16px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		-webkit-transition-duration: 0.4s; /* Safari */
+		transition-duration: 0.4s;
+		cursor: pointer;
+	}
+
+	.button1 {
+		background-color: white; 
+		color: black; 
+	}
+
+	.button1:hover {
+		background-color: #4CAF50;
+		color: white;
+	}
+
+	.button3 {
+		background-color: white; 
+		color: black; 
+	}
+
+	.button3:hover {
+		background-color: #F44336;
+		color: white;
+	}
+	a{
+		color: white;
+		text-decoration: none;
+	}
+	.footer{
+		background:#F44336;
+		width:100%;
+		height:100px;
+		position:absolute;
+		bottom:0;
+		left:0;
+	}
+    #status{
+        color: #ffffff;
+    }
+	</style>
+      
+   </head>
+   <body bgcolor="#e7bfbf">
+   <center>
+        <h2 style="font-family: Helvetica;color: white;">HOME AUTOMATION VIA INTERNET AND BLUETOOTH APP CONTROLLED</h2>
+	</center>
+   
+   <div class="center">
+	<div align="center" class="form">
+       <form action="" method="get">
+              <button type="button" id="D1-on" class="button button1" >LAMP1 ON</button>
+			  <button type="button" id="D1-off" class="button button3" >LAMP1 OFF</button>
+			  <br>
+			  <button type="button" id="D2-on" class="button button1" >LAMP2 ON</button>
+			  <button type="button" id="D2-off" class="button button3" >LAMP2 OFF</button>
+			  <br>
+			  <button type="button" id="D3-on" class="button button1" >LAMP3 ON</button>
+			  <button type="button" id="D3-off" class="button button3" >LAMP3 OFF</button>
+              <br>
+			  <button type="button" id="D4-on" class="button button1" >LAMP4 ON</button>
+			  <button type="button" id="D4-off" class="button button3" >LAMP4 OFF</button>
+			  <br>
+        </form>
+        <br>
+        <h3 id="status">status: </h3>
+        <br>
+	 </div>
+	</div>
+	
+	<footer class="footer">
+		<center>
+			<h4 style="font-family: Helvetica;color: rgb(253, 252, 252);">&copy; 2020 | <a href="#">Mustech Electronics Lab, Ilorin</a> | <a href="#">MustechElectronicsLab.com</a> </h4>
+		</center>
+	</footer>
+
+    </body>
+    
+	<script>
+		  document.getElementById('D1-on').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=1&status=on";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 1 Turn On");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+
+        document.getElementById('D1-off').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=1&status=off";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 1 Turn Off");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+		
+        document.getElementById('D2-on').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=2&status=on";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 2 Turn On");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+
+        document.getElementById('D2-off').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=2&status=off";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 2 Turn Off");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+		
+		
+        document.getElementById('D3-on').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=3&status=on";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 3 Turn On");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+
+        document.getElementById('D3-off').addEventListener('click', function() {
+				var url = "https://ihealthproject.000webhostapp.com/api1/led/update.php?id=3&status=off";
+				$.getJSON(url, function(data) {
+                    if(data['success']){
+                        $("#status").html( "Lamp 3 Turn Off");
+                    }else{
+                        $("#status").html( "Failed to update. check network");
+                    }
+				});
+		});
+        	
+        document.getElementById('D4-on').addEventListener('click', function() {
+				var url = "https://api.thingspeak.com/update?api_key=U6OHT9W80WDOADA3&field1=1";
+				$.getJSON(url, function(data) {
+                    if(data == 0){
+                        $("#status").html( "Lamp 4 Turn On");
+                    }else{
+                        $("#status").html(data);
+                    }
+				});
+		});
+
+        document.getElementById('D4-off').addEventListener('click', function() {
+			var url = "https://api.thingspeak.com/update?api_key=U6OHT9W80WDOADA3&field1=0";
+				$.getJSON(url, function(data) {
+                    if(data == 0){
+                        $("#status").html( "Lamp 4 Turn Off");
+                    }else{
+                        $("#status").html(data);
+                    }
+				});
+		});
+
+		
+	</script>
+</html>
